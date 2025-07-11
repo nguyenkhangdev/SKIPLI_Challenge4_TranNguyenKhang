@@ -1,15 +1,31 @@
 import express from "express";
 import "dotenv/config";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import indexRoutes from "./routes/index.js";
+import { errorHandler, errorMiddleware } from "./middlewares/resHandler.js";
 
 const app = express();
 
 const PORT = process.env.PORT;
+const corsOptions = {
+  origin: [
+    process.env.FRONTEND_URL,
+    `http://localhost:${process.env.FRONTEND_PORT}`,
+  ],
+  credentials: true,
+};
 
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors(corsOptions));
+
+app.use("/api/v1", indexRoutes);
 app.get("/", (req, res) => {
   res.send("Server API is running...");
 });
 app.use((req, res) => {
-  res.status(404).send("This route does not match.");
+  return errorHandler(404, "This route does not match.");
 });
 
 const start = async () => {
@@ -18,3 +34,5 @@ const start = async () => {
   });
 };
 start();
+
+app.use(errorMiddleware);
