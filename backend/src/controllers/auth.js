@@ -3,6 +3,7 @@ import { Timestamp } from "firebase-admin/firestore";
 import { random4DigitNumber } from "../utils/common.js";
 import { errorHandler, responseHandler } from "../middlewares/resHandler.js";
 import { generateToken } from "../utils/token.js";
+// import { sendSMSAccessCode } from "../services/twilio.js";
 
 // (POST) CreateNewAccessCode
 // Parameters: phoneNumber
@@ -42,8 +43,12 @@ export const CreateNewAccessCode = async (req, res, next) => {
     );
 
     //send SMS OTP
+    //because I use TWILO trial, so can't send sms to any phone number
+    //see sendSMSAccessCode() in backend/src/services/twilo.js
 
-    //I think, in real, don't send accessCode in response
+    //await sendSMSAccessCode(phoneNumber, accessCode);
+
+    //I think, in production, don't send accessCode in response
     return responseHandler(res, 200, "accessCode has been created.", {
       accessCode,
     });
