@@ -12,7 +12,6 @@ export const responseHandler = (
   if (cookie) {
     const cookieSameSite = isProd ? "none" : "lax";
     const cookieDomain = isProd ? process.env.RES_DOMAIN : "localhost";
-    console.log(cookieDomain);
     return res
       .status(statusCode)
       .cookie("access_token", cookie, {
