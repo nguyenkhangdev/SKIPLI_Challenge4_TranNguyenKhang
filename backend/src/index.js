@@ -24,8 +24,8 @@ app.use("/api/v1", indexRoutes);
 app.get("/", (req, res) => {
   res.send("Server API is running...");
 });
-app.use((req, res) => {
-  return errorHandler(404, "This route does not match.");
+app.use((req, res, next) => {
+  return next(errorHandler(404, "This route does not match."));
 });
 
 const start = async () => {

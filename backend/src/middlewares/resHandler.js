@@ -1,6 +1,5 @@
 import "dotenv/config";
 
-
 export const responseHandler = (
   res,
   statusCode,
@@ -29,13 +28,17 @@ export const responseHandler = (
 };
 
 export const errorHandler = (statusCode, message) => {
+  console.log("errorHandler");
   const error = new Error();
   error.statusCode = statusCode;
   error.message = message;
+  console.log(error);
+
   return error;
 };
 
 export const errorMiddleware = (err, req, res, next) => {
+  console.log("errorMiddleware");
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal server error";
   res.status(statusCode).json({
