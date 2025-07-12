@@ -82,12 +82,12 @@ export const ValidateAccessCode = async (req, res, next) => {
     if (
       accessCodeValidateData.accessCode.toString() !== accessCode.toString()
     ) {
-      return responseHandler(res, 401, "Invalid access code.");
+      return next(errorHandler( 401, "Invalid access code."));
     }
 
     const now = new Date();
     if (accessCodeValidateData.expiresAt.toDate() < now) {
-      return responseHandler(res, 401, "Access code expired.");
+      return next(errorHandler( 401, "Access code expired."));
     }
 
     //delete accessCode after validated true
