@@ -27,16 +27,15 @@ export const responseHandler = (
 };
 
 export const errorHandler = (statusCode, message) => {
-   const error = new Error();
+  const error = new Error();
   error.statusCode = statusCode;
   error.message = message;
-  console.log(error);
 
   return error;
 };
 
 export const errorMiddleware = (err, req, res, next) => {
-   const statusCode = err.statusCode || 500;
+  const statusCode = err.statusCode || 500;
   const message = err.message || "Internal server error";
   res.status(statusCode).json({
     status: false,
