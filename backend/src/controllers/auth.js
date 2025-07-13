@@ -22,6 +22,7 @@ export const CreateNewAccessCode = async (req, res, next) => {
       {
         phoneNumber,
         name: "SKIPLI Manager",
+        role: "manager",
       },
       { merge: true } //use merge: true to update or add fields  without overwriting
     );
@@ -82,21 +83,48 @@ export const ValidateAccessCode = async (req, res, next) => {
     if (
       accessCodeValidateData.accessCode.toString() !== accessCode.toString()
     ) {
-      return next(errorHandler( 401, "Invalid access code."));
+      return next(errorHandler(401, "Invalid access code."));
     }
 
     const now = new Date();
     if (accessCodeValidateData.expiresAt.toDate() < now) {
-      return next(errorHandler( 401, "Access code expired."));
+      return next(errorHandler(401, "Access code expired."));
     }
 
     //delete accessCode after validated true
     await db.collection("accessCodes").doc(phoneNumber).delete();
 
     //create cookie
-    const token = generateToken({ phoneNumber, role: "manager" });
+    const token = generateToken({ userID: phoneNumber, role: "manager" });
 
     return responseHandler(res, 200, "Validated access code.", null, token);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const GetMe = async (req, res, next) => {
+  try {
+    if (!req.user.userID) {
+      return next(errorHandler(400, "Token not found."));
+    }
+    let userData = null;
+    //get user info
+    if (req.user.role === "manager") {
+      userData = await db.collection("managers").doc(req.user.userID).get();
+    } else if (req.user.role === "employee") {
+      //get employee
+    } else {
+      return next(errorHandler(404, "You are not in role."));
+    }
+    let userDataRes = null;
+    if (userData.exists) {
+      userDataRes = userData.data();
+    } else {
+      return next(errorHandler(404, "User not found."));
+    }
+
+    return responseHandler(res, 200, "Get User info successful.", userDataRes);
   } catch (error) {
     next(error);
   }
