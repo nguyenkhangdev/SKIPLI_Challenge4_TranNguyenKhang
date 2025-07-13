@@ -94,10 +94,15 @@ export const ValidateAccessCode = async (req, res, next) => {
     //delete accessCode after validated true
     await db.collection("accessCodes").doc(phoneNumber).delete();
 
+    //get user info
+    const userRes = (
+      await db.collection("managers").doc(phoneNumber).get()
+    ).data();
+
     //create cookie
     const token = generateToken({ userID: phoneNumber, role: "manager" });
 
-    return responseHandler(res, 200, "Validated access code.", null, token);
+    return responseHandler(res, 200, "Validated access code.", userRes, token);
   } catch (error) {
     next(error);
   }
@@ -125,6 +130,17 @@ export const GetMe = async (req, res, next) => {
     }
 
     return responseHandler(res, 200, "Get User info successful.", userDataRes);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const signout = async (req, res, next) => {
+  try {
+    return res
+      .status(200)
+      .clearCookie("user_token")
+      .json({ status: true, message: "Sign out successful.", data: null });
   } catch (error) {
     next(error);
   }

@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../contexts/UseAuth";
 
 // Protect private routes from unauthorized access
-export default function PrivateRoute() {
+export default function ManagerPrivateRoute() {
   const { user, loadingUser } = useAuth();
 
   if (loadingUser) {
@@ -13,9 +13,5 @@ export default function PrivateRoute() {
     );
   }
 
-  return user?.role === "manager" || user?.role === "employee" ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" />
-  );
+  return user.role === "manager" ? <Outlet /> : <Navigate to="/" />;
 }
