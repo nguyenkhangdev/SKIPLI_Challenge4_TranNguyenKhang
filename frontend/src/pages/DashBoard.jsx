@@ -4,9 +4,10 @@ import { useState } from "react";
 import DashManageEmployee from "../components/dashboard/main-content/DashManageEmployee";
 import DashManageTask from "../components/dashboard/main-content/DashManageTask";
 import DashMessage from "../components/dashboard/main-content/DashMessage";
+import DashMain from "../components/dashboard/main-content/DashMain";
 
 export default function DashBoard() {
-  const [tab, setTab] = useState("manage-employee");
+  const [tab, setTab] = useState("");
 
   // one more, we can set URL prarams and wrap <Link><Link/> in Sidebar <li/>
   // useEffect(() => {
@@ -20,6 +21,7 @@ export default function DashBoard() {
       <div className="flex flex-row flex-grow">
         <DashSidebar tab={tab} setTab={setTab} />
         <div className="flex-grow p-4 bg-gray-50 rounded-tl-md">
+          {tab === "" && <DashMain />}
           {tab === "manage-employee" && <DashManageEmployee />}
           {tab === "manage-task" && <DashManageTask />}
           {tab === "message" && <DashMessage />}
