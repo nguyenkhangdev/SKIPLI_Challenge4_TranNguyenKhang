@@ -3,7 +3,7 @@ import "dotenv/config";
 export const responseHandler = (
   res,
   statusCode,
-  message = "Response successful",
+  message = "Response successful.",
   data = null,
   cookie = null
 ) => {
@@ -14,7 +14,7 @@ export const responseHandler = (
     const cookieDomain = isProd ? process.env.RES_DOMAIN : "localhost";
     return res
       .status(statusCode)
-      .cookie("access_token", cookie, {
+      .cookie("user_token", cookie, {
         httpOnly: true,
         sameSite: cookieSameSite,
         secure: isProd,
@@ -27,8 +27,7 @@ export const responseHandler = (
 };
 
 export const errorHandler = (statusCode, message) => {
-  console.log("errorHandler");
-  const error = new Error();
+   const error = new Error();
   error.statusCode = statusCode;
   error.message = message;
   console.log(error);
@@ -37,8 +36,7 @@ export const errorHandler = (statusCode, message) => {
 };
 
 export const errorMiddleware = (err, req, res, next) => {
-  console.log("errorMiddleware");
-  const statusCode = err.statusCode || 500;
+   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal server error";
   res.status(statusCode).json({
     status: false,

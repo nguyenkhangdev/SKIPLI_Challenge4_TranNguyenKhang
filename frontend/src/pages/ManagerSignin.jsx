@@ -4,8 +4,10 @@ import { Input, Button } from "antd";
 import api from "../services/axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "../contexts/UseAuth";
 
 export default function ManagerSignin() {
+  const { setUser } = useAuth();
   const navigate = useNavigate();
   const [screen, setScreen] = useState("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -50,6 +52,7 @@ export default function ManagerSignin() {
       });
       if (res.status) {
         toast.success(res.message);
+        setUser(res.data);
         navigate("/dashboard/manager");
       } else {
         toast.error(res.message);
