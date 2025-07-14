@@ -3,8 +3,10 @@ import { Button, Input, Modal } from "antd";
 import { useState } from "react";
 import api from "../../../services/axios";
 import { toast } from "react-toastify";
+import { useAuth } from "../../../contexts/UseAuth";
 
 export default function CreateEmployee({ fetchData }) {
+  const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -23,7 +25,10 @@ export default function CreateEmployee({ fetchData }) {
 
   const handleOk = async () => {
     try {
-      const res = await api.post(`/CreateEmployee`, formData);
+      const res = await api.post(`/CreateEmployee`, {
+        ...formData,
+        manager: user.phone,
+      });
       if (res.status) {
         toast.success(res.message);
         fetchData();
@@ -69,7 +74,7 @@ export default function CreateEmployee({ fetchData }) {
               name="name"
               value={formData.name}
               onChange={handleChange}
-             />
+            />
           </div>
           <div>
             <label className="block mb-4">Phone Number</label>
@@ -79,7 +84,7 @@ export default function CreateEmployee({ fetchData }) {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-             />
+            />
           </div>
           <div>
             <label className="block mb-4">Email Address</label>
@@ -89,7 +94,7 @@ export default function CreateEmployee({ fetchData }) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-             />
+            />
           </div>
           <div>
             <label className="block mb-4">Role</label>
@@ -99,7 +104,7 @@ export default function CreateEmployee({ fetchData }) {
               name="role"
               value={formData.role}
               onChange={handleChange}
-             />
+            />
           </div>
           <div className="md:col-span-2">
             <label className="block mb-4">Address</label>
@@ -109,7 +114,7 @@ export default function CreateEmployee({ fetchData }) {
               name="department"
               value={formData.department}
               onChange={handleChange}
-             />
+            />
           </div>
         </div>
       </Modal>

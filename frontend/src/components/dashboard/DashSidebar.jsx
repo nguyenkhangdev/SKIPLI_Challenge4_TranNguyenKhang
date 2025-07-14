@@ -21,7 +21,7 @@ export default function DashSidebar({ tab, setTab }) {
         style={{ left: 16, bottom: 16, right: "auto" }}
       />
       {isVisible && (
-        <div className="min-w-[240px] h-screen p-5 pt-8">
+        <div className="min-w-[240px] h-full p-5 pt-8">
           <ul className="flex flex-col gap-2">
             {menuItems
               .filter((item) => item.role.includes(user?.role))
@@ -36,7 +36,7 @@ export default function DashSidebar({ tab, setTab }) {
                   : ""
               }`}
                 >
-                  <span>{item.label}</span>
+                  <span className="font-bold">{item.label}</span>
                 </li>
               ))}
           </ul>

@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex flex-wrap gap-3 justify-center">
       <Link
-        to="/employee"
+        to="/employee/signin"
         className="hover:cursor-pointer flex flex-col items-center shadow-xl bg-blue-300 p-6 rounded-md w-60"
       >
         <FaUser className="h-20 w-20" />
