@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./contexts/AuthContext";
 import ManagerPrivateRoute from "./layout/ManagerPrivateRoute";
 import DashBoardManager from "./pages/DashBoardManager";
+import EmployeeSignin from "./pages/EmployeeSignin";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/manager/signin" element={<ManagerSignin />} />
+          <Route path="/employee/signin" element={<EmployeeSignin />} />
 
           <Route element={<ManagerPrivateRoute />}>
             <Route path="/dashboard/manager" element={<DashBoardManager />} />
