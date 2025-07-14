@@ -167,34 +167,34 @@ npm run dev
 ## Screenshots of application
 
 - Home page  
-  ![Home page](screenshots/Home page.png)
+  ![Home page](screenshots/home-page.png)
 
 - Sign in for manager  
-  ![Sign in for manager](screenshots/Sign in for manager.png)
+  ![Sign in for manager](screenshots/sign-in-for-manager.png)
 
 - Verify code for manager  
-  ![Verify code for manager](screenshots/Verify code for manager.png)
+  ![Verify code for manager](screenshots/verify-code-for-manager.png)
 
 - Dashboard for manager  
-  ![Dashboard for manager](screenshots/Dashboard for manager.png)
+  ![Dashboard for manager](screenshots/dashboard-for-manager.png)
 
 - Management employee  
-  ![Management employee](screenshots/Management employee.png)
+  ![Management employee](screenshots/management-employee.png)
 
 - Create employee  
-  ![Create employee](screenshots/Create employee.png)
+  ![Create employee](screenshots/create-employee.png)
 
 - Chat Message  
-  ![Chat Message](screenshots/Chat Message.png)
+  ![Chat Message](screenshots/chat-message.png)
 
 - Sign in for employee  
-  ![Sign in for employee](screenshots/Sign in for employee.png)
+  ![Sign in for employee](screenshots/sign-in-for-employee.png)
 
 - Verify code for employee  
-  ![Verify code for employee](screenshots/Verify code for employee.png)
+  ![Verify code for employee](screenshots/verify-code-for-employee.png)
 
 - Dashboard for employee  
-  ![Dashboard for employee](screenshots/Dashboard for employee.png)
+  ![Dashboard for employee](screenshots/dashboard-for-employee.png)
 
 ## License & Usage Terms
 
