@@ -111,7 +111,8 @@ export const ValidateAccessCode = async (req, res, next) => {
 
 export const GetMe = async (req, res, next) => {
   try {
-    if (!req.user.userID) {
+    console.log(req.user);
+    if (!req.user) {
       return next(errorHandler(400, "Token not found."));
     }
     let userData = null;
@@ -119,7 +120,7 @@ export const GetMe = async (req, res, next) => {
     if (req.user.role === "manager") {
       userData = await db.collection("managers").doc(req.user.userID).get();
     } else if (req.user.role === "employee") {
-      //get employee
+      userData = await db.collection("employees").doc(req.user.userID).get();
     } else {
       return next(errorHandler(404, "You are not in role."));
     }
@@ -159,10 +160,7 @@ export const LoginEmail = async (req, res, next) => {
       return next(errorHandler(400, "Missing email."));
     }
     //check employee has been created by manager
-    const employeeValidate = await db
-      .collection("accessCodes")
-      .doc(email)
-      .get();
+    const employeeValidate = await db.collection("employees").doc(email).get();
 
     if (!employeeValidate.exists) {
       return next(errorHandler(404, "Employee email not found."));
@@ -236,7 +234,7 @@ export const ValidateAccessCodeEmail = async (req, res, next) => {
     const userRes = (await db.collection("employees").doc(email).get()).data();
 
     //create cookie
-    const token = generateToken({ userID: email, role: "manager" });
+    const token = generateToken({ userID: email, role: "employee" });
 
     return responseHandler(res, 200, "Validated access code.", userRes, token);
   } catch (error) {

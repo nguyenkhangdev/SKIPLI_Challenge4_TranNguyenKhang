@@ -6,6 +6,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ManagerPrivateRoute from "./layout/ManagerPrivateRoute";
 import DashBoardManager from "./pages/DashBoardManager";
 import EmployeeSignin from "./pages/EmployeeSignin";
+import EmployeePrivateRoute from "./layout/EmployeePrivateRoute";
+import DashBoardEmployee from "./pages/DashBoardEmployee";
 
 export default function App() {
   return (
@@ -18,6 +20,10 @@ export default function App() {
 
           <Route element={<ManagerPrivateRoute />}>
             <Route path="/dashboard/manager" element={<DashBoardManager />} />
+          </Route>
+
+          <Route element={<EmployeePrivateRoute />}>
+            <Route path="/dashboard/employee" element={<DashBoardEmployee />} />
           </Route>
         </Routes>
         <ToastContainer />
