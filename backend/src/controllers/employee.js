@@ -77,7 +77,7 @@ export const GetEmployee = async (req, res, next) => {
 // Other requirement: Deletes the employee record associated with the given employeeId and returns a success message upon completion.
 export const DeleteEmployee = async (req, res, next) => {
   try {
-    const { employeeId } = req.body;
+    const employeeId = req.params.employeeId;
 
     if (!employeeId) {
       return next(errorHandler(400, "Missing employeeId."));
@@ -102,18 +102,14 @@ export const DeleteEmployee = async (req, res, next) => {
 export const GetEmployees = async (req, res, next) => {
   try {
     const employeesGet = await db.collection("employees").get();
+    let resData;
     if (employeesGet.empty) {
-      return next(errorHandler(404, "Employees not found."));
+      resData = [];
+    } else {
+      resData = employeesGet.docs.map((e) => e.data());
     }
-    const employeesGetData = employeesGet.docs.map((e) => e.data());
-    console.log(employeesGetData);
 
-    return responseHandler(
-      res,
-      200,
-      "Get employee successful",
-      employeesGetData
-    );
+    return responseHandler(res, 200, "Get employees successful", resData);
   } catch (error) {
     next(error);
   }

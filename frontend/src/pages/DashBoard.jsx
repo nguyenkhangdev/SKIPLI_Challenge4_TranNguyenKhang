@@ -19,7 +19,7 @@ export default function DashBoard() {
 
       <div className="flex flex-row flex-grow">
         <DashSidebar tab={tab} setTab={setTab} />
-        <div className="flex-grow p-4 bg-gray-100 rounded-tl-md">
+        <div className="flex-grow p-4 bg-gray-50 rounded-tl-md">
           {tab === "manage-employee" && <DashManageEmployee />}
           {tab === "manage-task" && <DashManageTask />}
           {tab === "message" && <DashMessage />}

@@ -12,6 +12,6 @@ const router = express.Router();
 router.get("/GetEmployee", GetEmployee);
 router.get("/GetEmployees", GetEmployees);
 router.post("/CreateEmployee", verifyAdmin, CreateEmployee);
-router.delete("/DeleteEmployee", verifyAdmin, DeleteEmployee);
+router.delete("/DeleteEmployee/:employeeId", verifyAdmin, DeleteEmployee);
 
 export default router;
