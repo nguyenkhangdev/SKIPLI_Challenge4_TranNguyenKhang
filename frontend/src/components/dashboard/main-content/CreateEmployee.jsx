@@ -27,12 +27,19 @@ export default function CreateEmployee({ fetchData }) {
     try {
       const res = await api.post(`/CreateEmployee`, {
         ...formData,
-        manager: user.phone,
+        manager: user.phoneNumber,
       });
       if (res.status) {
         toast.success(res.message);
         fetchData();
         setIsModalOpen(false);
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          role: "",
+          department: "",
+        });
       } else {
         toast.error(res.message);
       }
