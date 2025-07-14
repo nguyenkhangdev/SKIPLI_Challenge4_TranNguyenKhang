@@ -5,10 +5,12 @@ import cookieParser from "cookie-parser";
 import indexRoutes from "./routes/index.js";
 import { errorHandler, errorMiddleware } from "./middlewares/resHandler.js";
 
+//if use socket.io, import server in /services/socket.js
+
 const app = express();
 
 const PORT = process.env.PORT;
-const corsOptions = {
+export const corsOptions = {
   origin: [
     process.env.FRONTEND_URL,
     `http://localhost:${process.env.FRONTEND_PORT}`,

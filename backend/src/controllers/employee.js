@@ -7,7 +7,11 @@ import { db } from "../services/firebaseAdmin.js";
 // Other requirement: Creates a new employee record with the given details and returns a success message along with the generated employeeId.
 export const CreateEmployee = async (req, res, next) => {
   try {
-    const { name, email, department } = req.body;
+    const { name, email, department, manager } = req.body;
+
+    if (!manager) {
+      return next(errorHandler(400, "You are not a Manager."));
+    }
 
     if (!name || !email || !department) {
       return next(errorHandler(400, "Missing some fields."));
@@ -27,11 +31,22 @@ export const CreateEmployee = async (req, res, next) => {
         name,
         department,
         role: "employee",
+        manager,
       },
       { merge: true }
     );
     const createdEmployee = await db.collection("employees").doc(email).get();
     const employeeRes = createdEmployee.data();
+
+    //create chat room
+    await db.collection("chatrooms").doc(email).set(
+      {
+        manager,
+        email,
+        //messages
+      },
+      { merge: true }
+    );
     //end transaction
 
     return responseHandler(res, 200, "Employee has been created.", {
