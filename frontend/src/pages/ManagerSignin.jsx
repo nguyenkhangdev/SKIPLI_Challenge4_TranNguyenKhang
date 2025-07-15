@@ -27,7 +27,7 @@ export default function ManagerSignin() {
       //Send SMS OTP
       const res = await api.post("/CreateNewAccessCode", { phoneNumber });
       if (res.status) {
-        toast.success(res.message);
+        toast.success(`${res.message} code is ${res.data.accessCode}`);
         setScreen("validate");
       } else {
         toast.error(res.message);
