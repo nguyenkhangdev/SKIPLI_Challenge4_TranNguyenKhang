@@ -127,7 +127,7 @@ export default function EmployeeSignin() {
             <IoIosArrowRoundBack className="w-10 h-10 text-gray-700" />
             <span className="font-semibold text-sm">Back</span>
           </button>
-          <h1 className="text-4xl font-semibold ">Phone verification</h1>
+          <h1 className="text-4xl font-semibold ">Email verification</h1>
           <p className="text-gray-500 mb-6">
             Please enter your code that send to your email
           </p>

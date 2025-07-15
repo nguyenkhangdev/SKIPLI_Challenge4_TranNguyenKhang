@@ -3,6 +3,8 @@
 - Full Name: Trần Nguyên Khang
 - Email: nguyenkhangdev@gmail.com
 - Company: SKIPLI
+- Duration 5 days: July 10, 2025 – July 15, 2025 (9:00 AM GMT+7)
+
 
 # Real-Time Employee Task Management Tool
 
@@ -67,13 +69,9 @@ npm run dev
 - Assignment: https://docs.google.com/document/d/12hTItbxeJeVSiwICG0qtGjJ44Ocegh--0sgdCQws7As/edit?tab=t.0
 - Postman colection: https://www.postman.com/lunar-rocket-501382/workspace/skipli-challenge4-trannguyenkhang/collection/29459136-42efbb27-1178-47a3-8362-3cec56115842?action=share&source=copy-link&creator=29459136
 - Website Demo: https://skipli.nguyenkhangdev.id.vn
-- Video Youtube:
+- Video Youtube:[![Watch the demo](https://img.youtube.com/vi/HE1XwpRMlew/0.jpg)](https://www.youtube.com/watch?v=HE1XwpRMlew)
 
-# SKIPLI_Challenge4_TranNguyenKhang
-
-- Full Name: Trần Nguyên Khang
-- Email: nguyenkhangdev@gmail.com
-- Company: SKIPLI
+ 
 
 # Real-Time Employee Task Management Tool
 
